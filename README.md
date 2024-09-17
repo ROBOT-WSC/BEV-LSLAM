@@ -1,4 +1,4 @@
-# NUC-BEV
-NUC-BEV: Novelty, Universal, Compact BEV-Feature-Based SLAM Method in Outdoor Environment
+# BEV-LSLAM
+BEV-LSLAM: A Novel and Compact BEV LiDAR SLAM for Outdoor Environment
 
 The code will coming soon.
