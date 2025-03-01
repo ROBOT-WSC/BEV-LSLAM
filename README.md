@@ -11,7 +11,7 @@
 
 
 
-* **`13 March 2025`:**  Code updata
+* **`1 March 2025`:**  Code updata
 * **`7 January 2025`:** Accepted by [IEEE RAL](https://ieeexplore.ieee.org/document/10845798)! 
 
 ## Getting Started
