@@ -44,7 +44,7 @@ catkin_make
 
 ### Execution
 
-For your convenience, KITTI, Urbanloco and Groundrobot can be test on BEV-LSLAM. For Gropundrobot, we provide example test data [here](https://drive.google.com/drive/folders/1bt9vWPVgTF8I8JXSUO-Dpi3n2vomG6t9). To run, first launch BEV-LSLAM via:
+For your convenience, KITTI, Urbanloco and Groundrobot can be test on BEV-LSLAM. For Groundrobot, we provide example test data [here](https://drive.google.com/drive/folders/1bt9vWPVgTF8I8JXSUO-Dpi3n2vomG6t9). To run, first launch BEV-LSLAM via:
 
 ```sh
 roslaunch orb_lio orb_lo.launch
