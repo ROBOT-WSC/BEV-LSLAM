@@ -1,29 +1,31 @@
-# <div align = "center">RGC-SLAM: </div>
+# <div align = "center">BEV-LSLAM: </div>
 
-## <div align = "center">Robust Ground Constrained SLAM for Mobile Robot With Sparse-Channel LiDAR</div>
+## <div align = "center">A Novel and Compact BEV LiDAR SLAM for Outdoor Environment</div>
 
 
-> Shaocong Wang, Fengkui Cao, Ting Wang, Shiliang Shao, and Lianqing Liu
+> Shaocong Wang, Fengkui Cao, Xieyuanli Chen, Ting Wang and Lianqing Liu
 >
-> [IEEE Transactions on Intelligent Vehicles](https://ieeexplore.ieee.org/abstract/document/10654559)
+> [IEEE Robotics and Automation Letters](https://ieeexplore.ieee.org/document/10845798)
 
 ## News
 
 
 
-* **`13 Sept 2024`:**  Code updata
-* **`28 Aug 2024`:** Accepted by [IEEE TIV](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=7274857)! 
+* **`13 March 2025`:**  Code updata
+* **`7 January 2025`:** Accepted by [IEEE RAL](https://ieeexplore.ieee.org/document/10845798)! 
 
 ## Getting Started
 
 
 ### Instructions
-RGC-SLAM requires an input point cloud of type `sensor_msgs::PointCloud2` with an optional IMU input of type `sensor_msgs::Imu`.
+BEV-LSLAM requires an input point cloud of type `sensor_msgs::PointCloud2`
 
 ### Dependencies
 
 - Ubuntu 18.04 or 20.04
 - ROS Melodic or Noetic (`roscpp`, `std_msgs`, `sensor_msgs`, `geometry_msgs`, `pcl_ros`)
+- cv_bridge
+- Opencv
 - C++ 14
 - OpenMP
 - Point Cloud Library
@@ -32,44 +34,44 @@ RGC-SLAM requires an input point cloud of type `sensor_msgs::PointCloud2` with a
 
 ### Compiling
 
-Create a catkin workspace, clone the `ground_msg` and  `rgc_slam`  repository into the `src` folder, and compile via the [`catkin_tools`](https://catkin-tools.readthedocs.io/en/latest/) package (or [`catkin_make`](http://wiki.ros.org/catkin/commands/catkin_make) if preferred):
+Create a catkin workspace, clone the `imagecloud_msg` and  `orb_lio`  repository into the `src` folder, and compile via the [`catkin_tools`](https://catkin-tools.readthedocs.io/en/latest/) package (or [`catkin_make`](http://wiki.ros.org/catkin/commands/catkin_make) if preferred):
 
 ```sh
 mkdir ws && cd ws && mkdir src && catkin init && cd src
-git clone https://github.com/ROBOT-WSC/RGC-SLAM.git
+git clone https://github.com/ROBOT-WSC/BEV-LSLAM.git
 catkin_make
 ```
 
 ### Execution
 
-For your convenience, we provide example test data [here](https://drive.google.com/drive/folders/1bt9vWPVgTF8I8JXSUO-Dpi3n2vomG6t9) (4 sequences, `sequence1_to_4.zip`). To run, first launch RGC-SLAM (with default point cloud and IMU topics) via:
+For your convenience, KITTI, Urbanloco and Groundrobot can be test on BEV-LSLAM. For Gropundrobot, we provide example test data [here](https://drive.google.com/drive/folders/1bt9vWPVgTF8I8JXSUO-Dpi3n2vomG6t9). To run, first launch BEV-LSLAM via:
 
 ```sh
-roslaunch rgc_slam run.launch
+roslaunch orb_lio orb_lo.launch
 ```
 
 In a separate terminal session, play back the downloaded bag:
 
 ```
-rosbag play mynteye_stereo_velodyne_wheel_angle_GPS_2020-09-18-15-03-4#-playgroud.bag --clock
+rosbag play bag's name --clock
 ```
 
 ## Citation
 
-If you find RGC-SLAM is useful in your research or applications, please consider giving us a star 🌟 and citing it by the following BibTeX entry.
+If you find BEV-LSLAM is useful in your research or applications, please consider giving us a star 🌟 and citing it by the following BibTeX entry.
 
 ```bibtex
-@ARTICLE{wang2024rgcslam,
-  author={Wang, Shaocong and Cao, Fengkui and Wang, Ting and Shao, Shiliang and Liu, Lianqing},
-  journal={IEEE Transactions on Intelligent Vehicles}, 
-  title={Robust Ground Constrained SLAM for Mobile Robot With Sparse-Channel LiDAR}, 
-  year={2024},
-  volume={},
-  number={},
-  pages={1-12},
-  keywords={Laser radar;Simultaneous localization and mapping;Feature extraction;Robots;Degradation;Point cloud compression;Odometry;SLAM;Mobile robot;Ground constraint;Degraded environment;Sparse-channel LiDAR},
-  doi={10.1109/TIV.2024.3451137}}
+@ARTICLE{10845798,
+  author={Cao, Fengkui and Wang, Shaocong and Chen, Xieyuanli and Wang, Ting and Liu, Lianqing},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={BEV-LSLAM: A Novel and Compact BEV LiDAR SLAM for Outdoor Environment}, 
+  year={2025},
+  volume={10},
+  number={3},
+  pages={2462-2469},
+  keywords={Laser radar;Feature extraction;Simultaneous localization and mapping;Point cloud compression;Visualization;Tracking loops;Robots;Optimization;Pose estimation;Pipelines;SLAM;localization;mapping},
+  doi={10.1109/LRA.2025.3531727}}
 ```
 ## Acknowledgements
 
-We thank the authors of the [FastGICP](https://github.com/SMRT-AIST/fast_gicp) and [A-LOAM](https://github.com/HKUST-Aerial-Robotics/A-LOAM) open-source packages.
+We thank the authors of the [FastGICP](https://github.com/SMRT-AIST/fast_gicp), [orb-slam](https://github.com/raulmur/ORB_SLAM2) and [A-LOAM](https://github.com/HKUST-Aerial-Robotics/A-LOAM) open-source packages.
