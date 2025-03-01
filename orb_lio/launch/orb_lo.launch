@@ -1,0 +1,84 @@
+<launch>
+     <!--- Velodyne_packets to velodyne_points -->
+    <!-- <node pkg="velodyne_pointcloud" type="cloud_node" name="cloud_node">
+      <remap from="/velodyne_packets" to="/hdl32e_left/velodyne_packets"/>
+      <param name="calibration" value="$(find velodyne_pointcloud)/params/32db.yaml"/>
+      <param name="min_range" value="0.4"/>
+      <param name="max_range" value="130.0"/>
+      <param name="view_direction" value="3.1415926"/>
+      <param name="view_width" value="5.4769"/>
+    </node> -->
+
+    <!-- base -->
+    <param name="orb_lio/nFeatures" type="int" value="1500" />
+    <param name="orb_lio/fScaleFactor" type="double" value="1.2" />
+    <param name="orb_lio/nLevels" type="int" value="8" />
+    <param name="orb_lio/fIniThFAST" type="int" value="20" />
+    <param name="orb_lio/fMinThFAST" type="int" value="7" />
+    <param name="orb_lio/intensity" type="int" value="0" />
+
+
+    <param name="orb_lio/pointCloudTopic" type="string" value="/kitti/velo/pointcloud" />
+    <param name="orb_lio/imuTopic" type="string" value="/imu/data" />
+
+    <param name="orb_lio/N_SCAN" type="int" value="16" />
+    <param name="orb_lio/Horizon_SCAN" type="int" value="1800" />
+    <param name="orb_lio/MINIMUM_RANGE" type="double" value="1"/>
+    <param name="orb_lio/MAXMUM_RANGE" type="double" value="150"/>
+
+    <param name="orb_lio/image_resolution" type="double" value="0.4"/> 
+    <param name="orb_lio/min_distance" type="int" value="0"/>
+    <param name="orb_lio/image_length" type="int" value="80"/>
+    <param name="orb_lio/image_height" type="int" value="80"/> 
+
+    <param name="orb_lio/mapping_skip_frame" type="int" value="1"/> 
+    <param name="orb_lio/USE_IMU" type="int" value="0"/> 
+    <!-- odom -->
+    <param name="orb_lio/odom_pub" type="int" value="1"/>   
+
+    <param name="orb_lio/BA_freq" type="int" value="1"/>
+    <param name="orb_lio/windows_wideth" type="int" value="10"/> 
+    <param name="orb_lio/local_BA_type" type="int" value="2"/> 
+    <param name="orb_lio/local_BA_enable" type="int" value="1"/> 
+
+    <!-- mapping -->
+    <param name="orb_mapping/lineResolution" type="double" value="0.4"/>
+    <param name="orb_mapping/planeResolution" type="double" value="0.4"/>
+    <param name="orb_mapping/LoopClosureEnable" type="int" value="1"/>
+    <param name="orb_mapping/keyframeAddingDistance" type="double" value="0.5"/>
+    <param name="orb_mapping/keyframeAddingAngle" type="double" value="0.3"/>
+    <param name="orb_mapping/surroundingKeyframeSearchRadius" type="double" value="15"/>
+    <param name="orb_mapping/globalMapDensity" type="double" value="0.2"/>
+    <param name="orb_mapping/saveDirectory" type="string" value="$(find orb_lio)/result"/>
+        <!-- 00 location mode-->
+        <!-- 11 mapping mode-->
+    <param name="orb_mapping/RMODE" type="int" value="1"/>
+    <param name="orb_mapping/map_update" type="int" value="1"/>
+    <param name="orb_mapping/init_x" type="double" value="0.0"/>
+    <param name="orb_mapping/init_y" type="double" value="0.0"/>
+    <param name="orb_mapping/init_z" type="double" value="0.0"/>
+    <param name="orb_mapping/init_yaw" type="double" value="0"/> 
+    <param name="orb_mapping/down_simple_vgicp" type="double" value="0.5"/> 
+    <param name="orb_mapping/voc_path" type="string" value="/home/wsc/bev_lo/src/orb_lio/config/orbvoc.dbow3"/>
+    <param name="orb_mapping/enable_DoWB" type="int" value="1"/>
+    <param name="orb_mapping/MIN_LOOP_BOW_TH" type="double" value="0.015"/>
+    <param name="orb_mapping/select_DoWB_num" type="int" value="10"/>
+    <param name="orb_mapping/Common_view_num" type="int" value="10"/>
+
+    
+    <!-- pakage -->
+    <!-- <node pkg="orb_lio" type="scan2scan" name="scan2scan"/> -->
+    <!-- <node pkg="orb_lio" type="scanRegistration" name="scanRegistration"/>
+    <node pkg="orb_lio" type="laserodometry" name="laserodometry" /> -->
+    <!-- <node pkg="orb_lio" type="lasermapping" name="lasermapping" output="screen"/> -->
+
+    <!-- <node pkg="orb_lio" type="scanRegistration_kitti" name="scanRegistration_kitti"/> -->
+    <node pkg="orb_lio" type="scantoscan_kitti" name="scantoscan_kitti"/>
+    <node pkg="orb_lio" type="scantomap_kitti" name="scantomap_kitti" output="screen"/>
+
+    <arg name="rviz" default="true" />
+    <group if="$(arg rviz)">
+        <node launch-prefix="nice" pkg="rviz" type="rviz" name="wsc_rviz" args="-d $(find orb_lio)/rviz_cfg/wsc1.rviz" />
+    </group>
+
+</launch>
